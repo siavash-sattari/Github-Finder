@@ -3,7 +3,7 @@ class UI {
     this.profile = document.querySelector(".profile");
   }
 
-  // show profile --------------------------------------------------
+  // show profile ===============================
 
   showProfile(user) {
     this.profile.innerHTML = `
@@ -36,13 +36,38 @@ class UI {
   `;
   }
 
-  // clear profile 
+  // show repos ==================================
+
+  showRepos(repos) {
+    let output = "";
+
+    repos.forEach((repo) => {
+      output += `
+      <div class="card card-body">
+      <div class="row">
+        <div class="col-6">
+          <a href="${repo.html_url}" target="_blank"> ${repo.name} </a>
+        </div>
+        <div class="col-6">
+          <span class="badge badge-primary"> Star : ${repo.stargazers_count} </span>
+          <span class="badge badge-secondary"> Watchers : ${repo.watchers} </span>
+          <span class="badge badge-success"> Fork : ${repo.forks_count} </span>
+        </div>
+      </div>
+    </div>
+        `;
+    });
+
+    document.querySelector("#repos").innerHTML = output;
+  }
+
+  // clear profile ===============================
 
   clearProfile() {
     this.profile.innerHTML = "";
   }
 
-  // show alert 
+  // show alert ==================================
 
   showAlert(message, className) {
     this.clearAlert();
@@ -56,6 +81,8 @@ class UI {
       this.clearAlert();
     }, 2000);
   }
+
+  // clear alert =================================
 
   clearAlert() {
     let currentAlert = document.querySelector(".alert-danger");
